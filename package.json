@@ -4,7 +4,7 @@
   "description": "Test project for studying purposes. Some modern tools, libraries and frameworks were used (backbone.js, require.js, jquery, gulp, etc.)",
   "repository": {
     "type": "git",
-    "url": "?.git"
+    "url": "https://github.com/trofimovich/cinema-club.git"
   },
   "author": "Eugene Trofimovich <trofimovich.eugene@gmail.com>",
   "license": "MIT",

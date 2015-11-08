@@ -27,6 +27,12 @@ define([
 			onScreens.on("reset", onScreens.render);
 			popular.on("reset", popular.render);
 			topRated.on("reset", topRated.render);
+
+			var self = this;
+
+			topRated.on("reset", function() {
+				self.trigger("rendered");
+			});
 		},
 
 		render: function() {

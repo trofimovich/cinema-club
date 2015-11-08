@@ -16,7 +16,8 @@ function($, _, Backbone, MovieModel, cinemaClubTmpls) {
 			
 			var self = this;
 			this.model.on("change", function() {
-				self.render()
+				self.render();
+				self.trigger("rendered");
 			});
 
 			this.model.fetch({ reset: true });

@@ -6,7 +6,8 @@ define([
 	"app/templates/cinemaClubTmpls",
 	"app/views/movieListView",
 	"app/views/mainPageView",
-	"app/views/moviePageView"
+	"app/views/moviePageView",
+	"app/helpers/preloader"
 ], function(
 	$,
 	_,
@@ -15,7 +16,8 @@ define([
 	cinemaClubTmpls,
 	MovieListView,
 	MainPageView,
-	MoviePageView) {
+	MoviePageView,
+	preloader) {
 
 	var AppView = Backbone.View.extend({
 		el: $("body"),
@@ -40,6 +42,8 @@ define([
 			var pageView,
 				url;
 
+			preloader.startPreloader();
+
 			if(pageName === "index") {
 				pageView = new MainPageView({ el: $(".page-content") })
 			}
@@ -54,7 +58,7 @@ define([
 				pageView = new MoviePageView({ el: $(".page-content"), url: url })
 			}
 
-
+			pageView.on("rendered", preloader.stopPreloader);
 		}
 	});
 

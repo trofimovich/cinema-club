@@ -33,6 +33,11 @@ h2 {
 	margin-bottom: 15px;
 }
 
+.movie-card,
+.movie-card-main {
+	position: relative;
+}
+
 .movie-card object,
 .movie-card img {
 	width: 100%;
@@ -43,6 +48,19 @@ h2 {
 .movie-card-main img {
 	width: 100%;
 	margin-bottom: 15px;
+}
+
+.movie-card-main .add-to-favourites,
+.movie-card .add-to-favourites {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 2;
+	color: #ff4f00;
+}
+
+.add-to-favourites:hover {
+	color: #f80000;
 }
 
 .movie-title {

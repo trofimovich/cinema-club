@@ -1,0 +1,41 @@
+<h1><%= title %></h1>
+<div class="row">
+	<div class="col-md-5 col-sm-12">
+		<div class="movie-poster">
+			<a href="#">
+				<img src="http://image.tmdb.org/t/p/w600/<%= backdrop_path %>">
+			</a>
+		</div>
+	</div>
+	<div class="col-md-7 col-sm-12">
+		<ul class="movie-props">
+			<li class="movie-prop">
+				<span class="movie-prop-name">Country</span>
+				<span class="movie-prop-value"><%= budget %></span>
+			</li>
+			<li class="movie-prop">
+				<span class="movie-prop-name">Бюджет</span>
+				<span class="movie-prop-value"><%= budget %>$</span>
+			</li>
+			<li class="movie-prop">
+				<span class="movie-prop-name">Время</span>
+				<span class="movie-prop-value"><%= runtime %></span>
+			</li>
+			<li class="movie-prop">
+				<span class="movie-prop-name">Премьера в мире</span>
+				<span class="movie-prop-value"><%= release_date %></span>
+			</li>
+			<li class="movie-prop">
+				<span class="movie-prop-name">Рейтинг</span>
+				<span class="movie-prop-value"><%= vote_average %></span>
+			</li>
+		</ul>	
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">				
+		<p class="movie-description">
+			<%= overview %>
+		</p>
+	</div>
+</div>

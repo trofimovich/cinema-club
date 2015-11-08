@@ -45,17 +45,22 @@ define([
 			preloader.startPreloader();
 
 			if(pageName === "index") {
-				pageView = new MainPageView({ el: $(".page-content") })
+				pageView = new MainPageView({ el: $(".page-content") });
 			}
 
 			if(pageName === "movie") {
-				url = [
-						"https://api.themoviedb.org/3/movie/",
-						params,
-						"?api_key=5905778f9ef16e30fdd2407c34a27b03"
-					].join("");
+				pageView = new MoviePageView(
+									{
+										el: $(".page-content"),
+										url: {
+											api_key: "5905778f9ef16e30fdd2407c34a27b03",
+											movieId: params
+										}
+									});
+			}
 
-				pageView = new MoviePageView({ el: $(".page-content"), url: url })
+			if(pageName === "favourites") {
+				pageView = new FavouritesPageView({ el: $(".page-content") });
 			}
 
 			pageView.on("rendered", preloader.stopPreloader);

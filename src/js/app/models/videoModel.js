@@ -4,21 +4,14 @@ define([
 ], function(_, Backbone) {
 	var MovieModel = Backbone.Model.extend({
 		defaults: {
-			"title": "",
-			"backgroundPath": "",
 		},
 
-		initialize: function(params) {
-			this.params = params;
+		initialize: function(options) {
+			this.options = options;
 		},
 
 		url: function() {
-			return [
-				"https://api.themoviedb.org/3/movie/",
-				this.params.movieId,
-				"?api_key=",
-				this.params.api_key
-			].join("");
+			return this.options.url;
 		},
 
 		sync: function(method, model, options) {

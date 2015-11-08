@@ -7,7 +7,7 @@ define([
 		routes: {
 			"" : "goToIndex",
 			"index" : "goToIndex",
-			"movie" : "goToMovie"
+			"movie/:id" : "goToMovie"
 		},
 
 		initialize: function(params) {
@@ -18,8 +18,9 @@ define([
 			this.appView.setPage("index");
 		},
 
-		goToMovie: function() {
-			this.appView.setPage("movie");
+		goToMovie: function(movieId) {
+			console.log("goingToMovie");
+			this.appView.setPage("movie", movieId);
 		}
 	});
 

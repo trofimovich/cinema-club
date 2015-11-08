@@ -33,6 +33,7 @@ define([
 		},
 
 		render: function() {
+
 			var i = 0,
 				movieVw = {},
 				mainPageBlockVars = {
@@ -42,9 +43,7 @@ define([
 									};
 
 			this.$el.html("");
-			console.log(this.collection);
 			for(i = 0; i<this.collection.length; i++) {
-				console.log(this.collection.models[i]);
 				if(i === 1) {
 					movieVw = new MovieMainCardView({
 						model: this.collection.models[i]
@@ -66,11 +65,7 @@ define([
 				}
 			}
 
-			console.log(mainPageBlockVars);
-
-
 			this.$el.html(this.template(mainPageBlockVars));
-			console.log(this.$el);
 		}
 	});
 

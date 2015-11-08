@@ -1,6 +1,8 @@
 <div class="movie-card">
-	<a href='#'>
-		<img src='http://image.tmdb.org/t/p/w600/<%=  backdrop_path %>'>
+	<a href='/#movie/<%= id %>'>
+		<object class="img-rounded" data='http://image.tmdb.org/t/p/w600/<%=  backdrop_path %>' type='image/jpg'>
+			<img class="img-rounded" src='../../../images/no-image-available.jpg'>
+		</object>
 	</a>
-	<a href='#' class='movie-title'><%= title %></a>
+	<a href='/#movie/<%= id %>' class='movie-title'><%= title %></a>
 </div>

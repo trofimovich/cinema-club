@@ -1,22 +1,28 @@
 define([
 	"requirejs-text",
+	"requirejs-text!app/templates/appTmpl.html!strip",
 	"requirejs-text!app/templates/mainPageBlock.html!strip",
 	"requirejs-text!app/templates/movieCard.html!strip",
 	"requirejs-text!app/templates/movieMainCard.html!strip",
 	"requirejs-text!app/templates/movieSideList.html!strip",
-	"requirejs-text!app/templates/mainPage.html!strip"
+	"requirejs-text!app/templates/mainPage.html!strip",
+	"requirejs-text!app/templates/moviePage.html!strip"
 
-], function(requirejsText, mainPageBlock, movieCard, movieMainCard, movieSideList, mainPage) {
+], function(requirejsText, appTmpl, mainPageBlock, movieCard, movieMainCard, movieSideList, mainPage, moviePage) {
 	var templates = {
-		mainPageBlock: mainPageBlock,
+		appTmpl: appTmpl,
 
-		movieCard: movieCard,
+		mainPageBlock : mainPageBlock,
 
-		movieMainCard: movieMainCard,
+		movieCard : movieCard,
 
-		movieSideList: movieSideList,
+		movieMainCard : movieMainCard,
 
-		mainPage: mainPage
+		movieSideList : movieSideList,
+
+		mainPage : mainPage,
+
+		moviePage : moviePage
 	}
 
 	return templates;

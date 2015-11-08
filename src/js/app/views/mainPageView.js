@@ -14,7 +14,6 @@ define([
 	MovieListView) {
 
 	var MainPageView = Backbone.View.extend({
-		el: $("body"),
 
 		template: _.template(cinemaClubTmpls["mainPage"]),
 
@@ -35,10 +34,6 @@ define([
 			});
 
 			this.$el.html(renderedTmpl);
-		},
-
-		setPage: function(pageName) {
-			console.log("Setting page to " + pageName);
 		}
 	});
 

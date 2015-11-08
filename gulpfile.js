@@ -27,7 +27,7 @@ gulp.task("reload", function() {
 gulp.task("connect", function() {
 	connect.server({
 		root: "src/",
-		livereload: true
+		livereload: false
 	});
 });
 

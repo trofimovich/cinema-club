@@ -8,9 +8,23 @@ define([
 	"requirejs-text!app/templates/mainPage/mainPage.html!strip",
 	"requirejs-text!app/templates/moviePage/moviePage.html!strip",
 	"requirejs-text!app/templates/moviePage/videoBlock.html!strip",
-	"requirejs-text!app/templates/moviePage/movieDetails.html!strip"
+	"requirejs-text!app/templates/moviePage/movieDetails.html!strip",
+	"requirejs-text!app/templates/moviePage/creditsBlock.html!strip",
+	"requirejs-text!app/templates/moviePage/creditItem.html!strip",
 
-], function(requirejsText, appTmpl, mainPageBlock, movieCard, movieMainCard, movieSideList, mainPage, moviePage, videoBlock, movieDetails) {
+], function(
+	requirejsText,
+	appTmpl,
+	mainPageBlock,
+	movieCard,
+	movieMainCard,
+	movieSideList,
+	mainPage,
+	moviePage,
+	videoBlock,
+	movieDetails,
+	creditsBlock,
+	creditItem) {
 	
 	var templates = {
 		appTmpl: appTmpl,
@@ -29,7 +43,11 @@ define([
 
 		videoBlock: videoBlock,
 
-		movieDetails: movieDetails
+		movieDetails: movieDetails,
+
+		creditsBlock: creditsBlock,
+
+		creditItem: creditItem
 	}
 
 	return templates;

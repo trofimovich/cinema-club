@@ -11,6 +11,25 @@ h2 {
 	font-size: 40px;
 }
 
+
+.spoiler {
+    display: "table";
+    position: relative;
+	background-color: #f9fafa;
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+
+.spoiler-btn {
+	padding: 2px 6px;
+	cursor: pointer;
+}
+
+.spoiler-body {
+	padding: 6px;
+}
+
+
 .page-content {
 	min-height: 100%;
 }
@@ -56,7 +75,12 @@ h2 {
 	top: 20px;
 	right: 20px;
 	z-index: 2;
-	color: #ff4f00;
+	color: #eee;
+}
+
+.movie-card .add-to-favourites {
+	top: 10px;
+	right: 10px;
 }
 
 .add-to-favourites:hover {
@@ -68,6 +92,18 @@ h2 {
 	font-size: 20px;
 	text-decoration: none;
 	color: #555;
+}
+
+.movie-card .mark {
+	background: none;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	float: right;
+}
+
+.movie-card-main .mark {
+	font-size: 36px;
 }
 
 .movie-title:hover {
@@ -110,6 +146,31 @@ h2 {
 .movie-description {
 	font-size: 16px;
 	margin-top: 20px;
+}
+
+
+
+.credit-card {
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.credit-card .name {
+	font-size: 18px;
+	min-height: 36px;
+}
+
+.credit-card .role {
+	font-size: 14px;
+	line-height: 14px;
+	font-style: italic;
+	min-height: 28px;
+}
+
+.credit-card object,
+.credit-card img {
+	width: 100%;
+	margin-bottom: 5px;
 }
 
 /* ---- Favourites Page ---- */

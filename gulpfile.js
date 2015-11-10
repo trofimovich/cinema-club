@@ -1,6 +1,7 @@
 var gulp = require("gulp"),
 	gutil = require("gulp-util"),
-	connect = require("gulp-connect");
+	connect = require("gulp-connect"),
+	compass = require("gulp-compass");
 
 var templateSources = "src/js/app/templates/*.html";
 var jsSources = [
@@ -13,10 +14,32 @@ var jsSources = [
 					"src/js/app/views/*.js",
 				];
 
+var sassSources = [
+					"src/sass/*.scss",
+					"src/sass/base/*.scss",
+					"src/sass/fonts/*.scss",
+					"src/sass/layout/*.scss",
+					"src/sass/modules/*.scss",
+					"src/sass/pages/*.scss",
+					"src/sass/theme/*.scss",
+					"src/sass/utilities/*.scss",
+				];
+
 var cssSources = "src/css/*.css";
 
+gulp.task("compass", function() {
+	gulp.src(sassSources)
+		.pipe(compass({
+			sass: "src/sass",
+			image: "src/images",
+			style: "expanded"
+		}))
+		.pipe(gulp.dest("src/css"));
+});
+
 gulp.task("watch", function() {
-	gulp.watch([templateSources, jsSources, cssSources], ["reload"]);
+	gulp.watch([sassSources], ["compass"]);
+	gulp.watch([templateSources, jsSources, sassSources], ["reload"]);
 });
 
 gulp.task("reload", function() {

@@ -1,41 +1,48 @@
-<h1><%= title %></h1>
+<h2><%= title %> <a href="#" title="Add to favourites"><i class="fa fa-heart-o"></i></a></h2>
 <div class="row">
-	<div class="col-md-5 col-sm-12">
-		<div class="movie-poster">
-			<a href="#">
-				<img src="http://image.tmdb.org/t/p/w600/<%= backdrop_path %>">
-			</a>
+		<div class="col-md-6 col-sm-12 m-images-composite">
+			<img src="http://image.tmdb.org/t/p/w600/<%= backdrop_path %>" alt="<%= title %>">	
+
+			<ul class="l-list-inline l-list-col-3">
+				<li><a href="#"><img src="http://image.tmdb.org/t/p/w600/<%= backdrop_path %>" alt="<%= title %>"></a></li>
+				<li><a href="#"><img src="http://image.tmdb.org/t/p/w600/<%= backdrop_path %>" alt="<%= title %>"></a></li>
+				<li><a href="#"><img src="http://image.tmdb.org/t/p/w600/<%= backdrop_path %>" alt="<%= title %>"></a></li>
+			</ul>
+		</div>
+		
+		<div class="col-md-6 col-sm-12">
+			<ul class="l-list m-stats-list">
+				<li>
+					<span class="stat-name">Rating</span>
+					<span class="stat-value"><%= vote_average %> <i class="fa fa-star"></i></span>
+				</li>
+				<li>
+					<span class="stat-name">Release Date</span>
+					<span class="stat-value"><%= release_date %></span>
+				</li>
+				<li>
+					<span class="stat-name">Time</span>
+					<span class="stat-value"><%= runtime %> min</span>
+				</li>
+				<li>
+					<span class="stat-name">Budget</span>
+					<span class="stat-value">$<%= budget %></span>
+				</li>
+				<li>
+					<span class="stat-name">Revenue</span>
+					<span class="stat-value">$<%= revenue %></span>
+				</li>
+			</ul>
+		</div>
+</div>
+
+<section class="l-description">
+	<h3>Description:</h3>
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<p>
+				<%= overview %>
+			</p>
 		</div>
 	</div>
-	<div class="col-md-7 col-sm-12">
-		<ul class="movie-props">
-			<li class="movie-prop">
-				<span class="movie-prop-name">Country</span>
-				<span class="movie-prop-value"><%= budget %></span>
-			</li>
-			<li class="movie-prop">
-				<span class="movie-prop-name">Бюджет</span>
-				<span class="movie-prop-value"><%= budget %>$</span>
-			</li>
-			<li class="movie-prop">
-				<span class="movie-prop-name">Время</span>
-				<span class="movie-prop-value"><%= runtime %></span>
-			</li>
-			<li class="movie-prop">
-				<span class="movie-prop-name">Премьера в мире</span>
-				<span class="movie-prop-value"><%= release_date %></span>
-			</li>
-			<li class="movie-prop">
-				<span class="movie-prop-name">Рейтинг</span>
-				<span class="movie-prop-value"><%= vote_average %></span>
-			</li>
-		</ul>	
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">				
-		<p class="movie-description">
-			<%= overview %>
-		</p>
-	</div>
-</div>
+</section> <!-- /l-description -->

@@ -1,4 +1,9 @@
-<li class="list-group-item">
-	<a href='/#movie/<%= id %>' class='movie-title'><%= title %></a>
-	<p>Премьера: <%= release_date %></p>
+<li class="clearfix">
+	<div class="align-left movie-title">
+		<h3><a href="/#movie/<%= id %>"><%= title %></a></h3>
+		<p>Release: <%= release_date %></p>
+	</div>
+	<div class="align-right movie-rating">
+		<p><%= vote_average %> <i class="fa fa-star"></i></p>
+	</div>
 </li>

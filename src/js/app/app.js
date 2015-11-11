@@ -19,16 +19,7 @@ define([
 	AppView,
 	AppRouter) {
 
-	//var mainpage = new MainPageView();
 	var app = new AppView();
 	var router = new AppRouter({ view: app });
 	Backbone.history.start();
-
-	window.debug = {
-		MovieModel: MovieModel,
-		MovieCollection: MovieCollection,
-		MovieCardView: MovieCardView,
-		MovieListView: MovieListView,
-		MoviePageView: MoviePageView
-	}
 });

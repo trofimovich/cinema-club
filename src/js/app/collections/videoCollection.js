@@ -6,12 +6,6 @@ define([
 	var MovieCollection = Backbone.Collection.extend({
 		model: VideoModel,
 
-		sync: function(method, model, options) {
-			options.timeout = 8000;
-			options.dataType = "jsonp";
-			return Backbone.sync(method, model, options);
-		},
-
 		url: function() {
 			console.log(this.params)
 			return [

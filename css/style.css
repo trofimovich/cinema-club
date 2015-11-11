@@ -180,12 +180,16 @@ a:hover {
   border-radius: 10px;
 }
 .image-card .card-title, .movie-card .card-title, .movie-card-main .card-title {
-  font: bold 16.8px/25.2px "Open Sans", Helvetica, Arial, sans-serif;
+  font: bold 14px/16.8px "Open Sans", Helvetica, Arial, sans-serif;
+  height: 33.6px;
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
 .image-card .card-subtitle, .movie-card .card-subtitle, .movie-card-main .card-subtitle {
-  font: italic 12.6px/18.9px "Open Sans", Helvetica, Arial, sans-serif;
+  font: italic 12.6px/12.6px "Open Sans", Helvetica, Arial, sans-serif;
+  height: 25.2px;
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
@@ -220,6 +224,10 @@ a:hover {
 }
 
 .fa-heart-o:hover {
+  color: red;
+}
+
+.fa-heart {
   color: red;
 }
 
@@ -275,6 +283,16 @@ a:hover {
 .m-cards-list {
   overflow: hidden;
   *zoom: 1;
+}
+.m-cards-list .image-card, .m-cards-list .movie-card, .m-cards-list .movie-card-main {
+  height: 308.8px;
+  margin-bottom: 21px;
+}
+@media (max-width: 992px) {
+  .m-cards-list .image-card, .m-cards-list .movie-card, .m-cards-list .movie-card-main {
+    @extends .image-card;
+    height: auto;
+  }
 }
 
 .m-composite-list > li {

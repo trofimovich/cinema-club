@@ -20,9 +20,23 @@ define([
 		initialize: function() {
 			this.render();
 
-			var onScreens = new MovieListView({ el: $(".on-screens-content"), collection: new MovieCollection({}), url: "https://api.themoviedb.org/3/movie/now_playing?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1" });
-			var popular = new MovieListView({ el: $(".popular-content"), collection: new MovieCollection({}), url: "https://api.themoviedb.org/3/movie/popular?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1" });
-			var topRated = new MovieListView({ el: $(".top-rated-content"), collection: new MovieCollection({}), url: "https://api.themoviedb.org/3/movie/top_rated?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1" });
+			var onScreens = new MovieListView({
+												el: $(".on-screens-content"),
+												collection: new MovieCollection({}),
+												url: "https://api.themoviedb.org/3/movie/now_playing?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1"
+											});
+			
+			var popular = new MovieListView({
+												el: $(".popular-content"),
+												collection: new MovieCollection({}),
+												url: "https://api.themoviedb.org/3/movie/popular?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1"
+											});
+			
+			var topRated = new MovieListView({
+												el: $(".top-rated-content"),
+												collection: new MovieCollection({}),
+												url: "https://api.themoviedb.org/3/movie/top_rated?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1"
+											});
 
 			onScreens.on("reset", onScreens.render);
 			popular.on("reset", popular.render);

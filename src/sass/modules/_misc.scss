@@ -8,13 +8,17 @@
 	}
 
 	.card-title {
-		font: bold #{$base-font-size * 1.2 }/#{$baseline * 1.2} $primary-font;
+		font: bold #{$base-font-size }/#{$base-font-size * 1.2} $primary-font;
+		height: $base-font-size*2.4;
+		overflow: hidden;
 		margin: 0;
 		padding: 0;
 	}
 
 	.card-subtitle {
-		font: italic #{$base-font-size * 0.9 }/#{$baseline * 0.9} $primary-font;
+		font: italic #{$base-font-size * 0.9 }/#{$base-font-size * 0.9} $primary-font;
+		height: $base-font-size*1.8;
+		overflow: hidden;
 		margin: 0;
 		padding: 0;
 	}

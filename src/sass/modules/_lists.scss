@@ -58,6 +58,19 @@
 
 .m-cards-list {
 	@include clearfix;
+
+
+	.image-card {
+		height: $base-font-size*1.8 + $base-font-size*2.4 + 250;
+		margin-bottom: $baseline;
+	}
+
+	@media (max-width: 992px) {
+		.image-card {
+			@extends .image-card;
+			height: auto;
+		}
+	}
 }
 
 .m-composite-list {

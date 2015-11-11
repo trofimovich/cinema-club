@@ -6,22 +6,35 @@ define([
 	var MovieCollection = Backbone.Collection.extend({
 		model: MovieModel,
 
-		sync: function(method, model, options) {
-			options.timeout = 8000;
-			options.dataType = "jsonp";
-			return Backbone.sync(method, model, options);
+		initialize: function(params) {
+			this.params = params;
 		},
 
-		initialize: function() {
-/*			this.fetch({
-				success: this.onFetchSuccess,
-				error: this.onFetchError,
-				reset: true
-			});*/
+		url: function() {
+
+			/*
+				url_example: https://api.themoviedb.org/3/person/1892/movie_credits?api_key=some_api_key
+
+				category: person, movie, etc.
+				itemId: 1892, etc.
+				subcategory: movie_credits, etc.
+				api_key: 12345...
+			*/
+
+			return [
+				"https://api.themoviedb.org/3/",
+				this.params.category,
+				"/",
+				this.params.itemId,
+				"/",
+				this.params.subcategory,
+				"?api_key=",
+				this.params.api_key
+			].join("");
 		},
 
 		parse: function(response) {
-			return response.results;
+			return (this.params.subcategory === "movie_credits") ? response.cast : response.results;
 		},
 
 		onFetchSuccess: function(collection, response) {

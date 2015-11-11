@@ -1,10 +1,12 @@
 <li>
 	<div class="col-md-2 col-sm-4 image-card">
-		<p class="card-title"><a href="#"><%= name %></a></p>
+		<p class="card-title"><a href="/#person/<%= id %>"><%= name %></a></p>
 		<p class="card-subtitle"><%= character %></p>
 
-		<object type="image/jpg" data="http://image.tmdb.org/t/p/w185/<%= profile_path %>" alt="<%= name %>">
-			<img src='../../../images/no-photo-available.jpg'>
-		</object>
+		<a href="/#person/<%= id %>">
+			<object type="image/jpg" data="http://image.tmdb.org/t/p/w185/<%= profilePath %>" alt="<%= name %>">
+				<img src='../../../images/thumbnail-vertical.png'>
+			</object>
+		</a>
 	</div>
 </li>

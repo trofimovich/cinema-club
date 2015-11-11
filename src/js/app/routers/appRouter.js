@@ -8,7 +8,8 @@ define([
 			"": "goToIndex",
 			"index": "goToIndex",
 			"favourites": "goToFavourites",
-			"movie/:id": "goToMovie"
+			"movie/:id": "goToMovie",
+			"person/:id": "goToPerson"
 		},
 
 		initialize: function(params) {
@@ -21,6 +22,10 @@ define([
 
 		goToMovie: function(movieId) {
 			this.appView.setPage("movie", movieId);
+		},
+
+		goToPerson: function(personId) {
+			this.appView.setPage("person", personId);
 		},
 
 		goToFavourites: function() {

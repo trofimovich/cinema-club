@@ -8,6 +8,7 @@ define([
 	"app/views/mainPageView",
 	"app/views/moviePageView",
 	"app/views/personPage/personPageView",
+	"app/views/favouritesPageView",
 	"app/helpers/preloader"
 ], function(
 	$,
@@ -19,6 +20,7 @@ define([
 	MainPageView,
 	MoviePageView,
 	PersonPageView,
+	FavouritesPageView,
 	preloader) {
 
 	var AppView = Backbone.View.extend({
@@ -44,16 +46,18 @@ define([
 			var pageView,
 				url;
 
-			preloader.startPreloader();
 
 			if(pageName === "index") {
+				preloader.startPreloader();
 				pageView = new MainPageView(
 									{
 										el: $(".page-content")
 									});
+				pageView.on("rendered", preloader.stopPreloader);
 			}
 
 			if(pageName === "movie") {
+				preloader.startPreloader();
 				pageView = new MoviePageView(
 									{
 										el: $(".page-content"),
@@ -62,9 +66,11 @@ define([
 											movieId: params
 										}
 									});
+				pageView.on("rendered", preloader.stopPreloader);
 			}
 
 			if(pageName === "person") {
+				preloader.startPreloader();
 				pageView = new PersonPageView(
 									{
 										el: $(".page-content"),
@@ -73,13 +79,18 @@ define([
 											personId: params
 										}
 									});
+				pageView.on("rendered", preloader.stopPreloader);
 			}
+
 
 			if(pageName === "favourites") {
-				pageView = new FavouritesPageView({ el: $(".page-content") });
+				pageView = new FavouritesPageView(
+									{
+										el: $(".page-content"),
+										section: params
+									});
 			}
 
-			pageView.on("rendered", preloader.stopPreloader);
 		}
 	});
 

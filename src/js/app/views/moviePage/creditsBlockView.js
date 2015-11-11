@@ -32,7 +32,7 @@ define([
 				movieId: this.params.url.movieId
 			});
 
-			this.collection.fetch({ "reset" : true });
+			this.collection.fetch({ "reset" : true, ajaxSync: true });
 
 
 

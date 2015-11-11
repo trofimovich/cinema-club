@@ -1,0 +1,12 @@
+<div class="l-container container">
+	<section class="main list-page">
+		<h2>Favourites:</h2>
+		<ul class="l-list m-composite-list">
+			<% if(!listItems) { %>
+				<h2>There is nothing here, so add something <i class="fa fa-smile-o"></i></h2>
+			<% } %>
+
+			<%= listItems %>
+		</ul>
+	</section>
+</div>

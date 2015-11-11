@@ -7,7 +7,7 @@ define([
 		routes: {
 			"": "goToIndex",
 			"index": "goToIndex",
-			"favourites": "goToFavourites",
+			"favourites/:section": "goToFavourites",
 			"movie/:id": "goToMovie",
 			"person/:id": "goToPerson"
 		},
@@ -17,6 +17,7 @@ define([
 		},
 
 		goToIndex: function() {
+			console.log("wow");
 			this.appView.setPage("index");
 		},
 
@@ -28,8 +29,8 @@ define([
 			this.appView.setPage("person", personId);
 		},
 
-		goToFavourites: function() {
-			this.appView.setPage("favourites");
+		goToFavourites: function(section) {
+			this.appView.setPage("favourites", section);
 		}
 	});
 

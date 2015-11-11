@@ -215,6 +215,7 @@ a:hover {
 }
 
 /* Styles for images block in movie and actor pages */
+.m-images-composite object,
 .m-images-composite img {
   width: 100%;
   margin-bottom: 1rem;
@@ -322,6 +323,9 @@ a:hover {
 }
 .movie-page .row {
   margin-bottom: 1.5rem;
+}
+.movie-page .movie-video-block .image-card, .movie-page .movie-video-block .movie-card, .movie-page .movie-video-block .movie-card-main {
+  height: auto;
 }
 
 .actor-page .m-stats-list li:first-child {

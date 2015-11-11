@@ -10,8 +10,7 @@ define([
 		template: _.template(cinemaClubTmpls["personDetails"]),
 
 		events: {
-			"click .fa-heart-o": "addToFavourites",
-			"click .fa-heart": "removeFromFavourites"
+			"click .fa-heart,.fa-heart-o": "toggleFavourites"
 		},
 
 		initialize: function(params) {
@@ -32,19 +31,12 @@ define([
 				self.trigger("rendered");
 			});
 			
-			this.model.fetch({ reset: true });
+			this.model.fetch({ reset: true, ajaxSync: true });
 		},
 
-		addToFavourites: function(e) {
+		toggleFavourites: function(e) {
 			e.preventDefault();
-
-			$(e.target).removeClass("fa-heart-o").addClass("fa-heart");
-		},
-
-		removeFromFavourites: function(e) {
-			e.preventDefault();
-
-			$(e.target).removeClass("fa-heart").addClass("fa-heart-o");
+			this.model.toggleFavourites();
 		}
 	});
 

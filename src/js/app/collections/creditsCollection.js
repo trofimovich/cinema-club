@@ -1,8 +1,9 @@
 define([
 	"underscore",
 	"backbone",
-	"app/models/creditModel"
-], function(_, Backbone, CreditModel) {
+	"backbone-local-storage",
+	"app/models/creditModel",
+], function(_, Backbone, localstorage, CreditModel) {
 	var CreditsCollection = Backbone.Collection.extend({
 		model: CreditModel,
 

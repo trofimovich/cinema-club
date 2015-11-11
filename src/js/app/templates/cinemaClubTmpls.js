@@ -17,7 +17,11 @@ define([
 	"requirejs-text!app/templates/personPage/personPage.html!strip",
 	"requirejs-text!app/templates/personPage/personDetails.html!strip",
 	"requirejs-text!app/templates/personPage/personMoviesBlock.html!strip",
-	"requirejs-text!app/templates/personPage/personMovieItem.html!strip"
+	"requirejs-text!app/templates/personPage/personMovieItem.html!strip",
+	
+	"requirejs-text!app/templates/listPage/listPage.html!strip",
+	"requirejs-text!app/templates/listPage/movieListItem.html!strip",
+	"requirejs-text!app/templates/listPage/personListItem.html!strip"
 
 ], function(
 	requirejsText,
@@ -35,7 +39,10 @@ define([
 	personPage,
 	personDetails,
 	personMoviesBlock,
-	personMovieItem) {
+	personMovieItem,
+	listPage,
+	movieListItem,
+	personListItem) {
 	
 	var templates = {
 		appTmpl: appTmpl,
@@ -66,7 +73,13 @@ define([
 
 		personMoviesBlock: personMoviesBlock,
 
-		personMovieItem: personMovieItem
+		personMovieItem: personMovieItem,
+
+		listPage: listPage,
+
+		movieListItem: movieListItem,
+
+		personListItem: personListItem
 	}
 
 	return templates;

@@ -1,6 +1,6 @@
 <li>
 	<div class="col-md-2 col-sm-4 image-card">
-		<p class="card-title"><a href="/#person/<%= id %>"><%= name %></a></p>
+		<p class="card-title"><a href="/#person/<%= id %>"><%= name %></a> <% if(isInFavourites) { %> <i class="fa fa-heart"></i> <% } %></p>
 		<p class="card-subtitle"><%= character %></p>
 
 		<a href="/#person/<%= id %>">

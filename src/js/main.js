@@ -4,13 +4,18 @@ require.config({
 		"underscore": "../vendor/underscore-amd/underscore",
 		"backbone": "../vendor/backbone-amd/backbone",
 		"bootstrap": "../vendor/bootstrap/dist/js/bootstrap",
-		"requirejs-text": "../vendor/text/text"
+		"requirejs-text": "../vendor/text/text",
+		"backbone-local-storage": "../vendor/backbone.localStorage/backbone.localStorage-min"
 	},
 
 	shim: {
 		"bootstrap": {
 			deps: ["jquery"],
 			exports: "$.fn.popover"
+		},
+
+		"backbone-local-storage": {
+			deps: ["backbone"]
 		}
 	}
 });

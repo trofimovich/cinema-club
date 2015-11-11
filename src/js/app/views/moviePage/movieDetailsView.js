@@ -9,6 +9,10 @@ define([
 
 		template: _.template(cinemaClubTmpls["movieDetails"]),
 
+		events: {
+			"click .fa-heart,.fa-heart-o": "toggleFavourites"
+		},
+
 		initialize: function(params) {
 			this.params = params;
 		},
@@ -28,7 +32,12 @@ define([
 				self.trigger("rendered");
 			});
 			
-			this.model.fetch({ reset: true });
+			this.model.fetch({ reset: true, ajaxSync: true });
+		},
+
+		toggleFavourites: function(e) {
+			e.preventDefault();
+			this.model.toggleFavourites();
 		}
 	});
 

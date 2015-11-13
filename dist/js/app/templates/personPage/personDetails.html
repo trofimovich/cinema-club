@@ -1,0 +1,49 @@
+<h2><%= name %>
+	<a href="#" title="Add to favourites">
+		<i <% if(isInFavourites) { %> class="fa fa-heart" <% } else { %> class="fa fa-heart-o" <% } %>></i>
+	</a>
+</h2>
+
+<div class="row">
+	<div class="m-images-composite">
+		<div class="col-md-3 col-sm-4 image-card">
+			<a href="http://image.tmdb.org/t/p/original/<%= profilePath %>" target="_blank">
+				<object type="image/jpg" data="http://image.tmdb.org/t/p/w500/<%= profilePath %>" alt="<%= name %>">
+					<img src='../../../images/thumbnail-vertical.png'>
+				</object>
+			</a>
+		</div>
+	</div>	
+
+	<div class="col-md-8 col-sm-6">
+		<ul class="l-list m-stats-list">
+			<li>
+				<span class="stat-name">Birthday</span>
+				<span class="stat-value"><%= birthday %></span>
+			</li>
+			<li>
+				<span class="stat-name">Place of Birth</span>
+				<span class="stat-value"><%= placeOfBirth %></span>
+			</li>
+			<li>
+				<span class="stat-name">Age</span>
+				<span class="stat-value"><%= personAge %></span>
+			</li>
+			<li>
+				<span class="stat-name">Homepage</span>
+				<span class="stat-value"><a href="<%= homepage %>" target="_blank"><%= homepage %></a></span>
+			</li>
+		</ul>
+	</div> <!-- /m-stats-list -->
+</div>
+
+<section class="l-description">
+	<h3>Biography:</h3>
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<p>
+				<%= biography %>
+			</p>
+		</div>
+	</div>
+</section> <!-- /l-description -->

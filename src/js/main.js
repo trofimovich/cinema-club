@@ -5,7 +5,8 @@ require.config({
 		"backbone": "../vendor/backbone-amd/backbone",
 		"bootstrap": "../vendor/bootstrap/dist/js/bootstrap",
 		"requirejs-text": "../vendor/text/text",
-		"backbone-local-storage": "../vendor/backbone.localStorage/backbone.localStorage-min"
+		"backbone-local-storage": "../vendor/backbone.localStorage/backbone.localStorage-min",
+		"nicescroll": "../vendor/jquery.nicescroll/jquery.nicescroll.min"
 	},
 
 	shim: {
@@ -16,6 +17,10 @@ require.config({
 
 		"backbone-local-storage": {
 			deps: ["backbone"]
+		},
+
+		"nicescroll": {
+			deps: ["jquery"]
 		}
 	}
 });

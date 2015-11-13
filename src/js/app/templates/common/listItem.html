@@ -1,0 +1,38 @@
+<% if(type === "movie") { %>
+<li>
+	<div class="row">
+		<div class="col-md-3 image-card">
+			<object type="image/jpg" data="http://image.tmdb.org/t/p/w600/<%= imagePath %>" alt="<%= title %>">
+				<img src='../../../images/thumbnail-horizontal.png'>
+			</object>
+		</div>
+
+		<div class="col-md-8 col-sm-12">
+			<h3 class="clearfix">
+				<a href="/#movie/<%= id %>" class="align-left"><%= title %></a>
+				</a><span class="align-right"><%= voteAverage %> <i class="fa fa-star"></i></span>
+			</h3>
+			<p><%= description %></p>
+		</div>
+	</div>
+</li>
+<% } %>
+
+<% if(type === "person") { %>
+<li>
+	<div class="row">
+		<div class="col-md-2 image-card">
+			<object type="image/jpg" data="http://image.tmdb.org/t/p/w185/<%= imagePath %>" alt="<%= title %>">
+				<img src='../../../images/thumbnail-vertical.png'>
+			</object>
+		</div>
+
+		<div class="col-md-8 col-sm-12">
+			<h3 class="clearfix">
+				<a href="/#person/<%= id %>" class="align-left"><%= title %></a>
+			</h3>
+			<p><%= description %></p>
+		</div>
+	</div>
+</li>
+<% } %>

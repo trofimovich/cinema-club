@@ -1,12 +1,13 @@
-<div class="l-container container">
-	<section class="main list-page">
-		<h2>Favourites:</h2>
-		<ul class="l-list m-composite-list">
-			<% if(!listItems) { %>
-				<h2>There is nothing here, so add something <i class="fa fa-smile-o"></i></h2>
-			<% } %>
 
-			<%= listItems %>
-		</ul>
+	<section class="main list-page">
+		<h2><i class="fa fa-heart"></i> Favourites:</h2>
+		<div class="btn-group" role="group" aria-label="Sort by">
+			<button type="button" class="btn btn-default rating" data-comparator="voteAverage">Rating</button>
+			<button type="button" class="btn btn-default title" data-comparator="title">Title</button>
+		</div>
+		<div class="list">
+			<ul class="l-list m-composite-list">
+				<!-- <h2>There is nothing here, so add something <i class="fa fa-smile-o"></i></h2> -->
+			</ul>
+		</div>
 	</section>
-</div>

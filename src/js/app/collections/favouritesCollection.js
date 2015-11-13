@@ -2,13 +2,18 @@ define([
 	"underscore",
 	"backbone",
 	"backbone-local-storage",
-	"app/models/creditModel",
+	"app/models/personModel",
 	"app/models/movieModel"
-], function(_, Backbone, localstorage, CreditModel, MovieModel) {
+], function(_, Backbone, localstorage, PersonModel, MovieModel) {
 	var FavouritesCollection = Backbone.Collection.extend({
 
 		localStorage: new Backbone.LocalStorage("fav-person"),
-
+/*
+		comparator: function(model) {
+			console.log(model.get("title"));
+			return model.get("title");
+		},
+*/
 		initialize: function(params) {
 			this.params = params;
 			switch (this.params.modelType) {
@@ -18,7 +23,7 @@ define([
 					break;
 				case "persons":
 					this.localStorage = new Backbone.LocalStorage("fav-person");
-					this.model = CreditModel;
+					this.model = PersonModel;
 					break;
 			}
 		},

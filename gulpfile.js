@@ -3,6 +3,16 @@ var gulp = require("gulp"),
 	connect = require("gulp-connect"),
 	compass = require("gulp-compass");
 
+env = process.env.NODE_ENV || "development";
+
+if(env === "development") {
+	outputDir = "src";
+	sassStyle = "expanded";
+} else {
+	outputDir = "dist";
+	sassStyle = "compressed";
+}
+
 var templateSources = "src/js/app/templates/*.html";
 var jsSources = [
 					"src/js/*.js",

@@ -17,7 +17,6 @@ define([
 		},
 
 		goToIndex: function() {
-			console.log("wow");
 			this.appView.setPage("index");
 		},
 

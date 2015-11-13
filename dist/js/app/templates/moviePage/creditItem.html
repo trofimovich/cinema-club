@@ -1,0 +1,12 @@
+<li>
+	<div class="col-md-2 col-sm-4 image-card">
+		<p class="card-title"><a href="/#person/<%= id %>"><%= name %></a> <% if(isInFavourites) { %> <i class="fa fa-heart"></i> <% } %></p>
+		<p class="card-subtitle"><%= character %></p>
+
+		<a href="/#person/<%= id %>">
+			<object type="image/jpg" data="http://image.tmdb.org/t/p/w185/<%= profilePath %>" alt="<%= name %>">
+				<img src='../../../images/thumbnail-vertical.png'>
+			</object>
+		</a>
+	</div>
+</li>

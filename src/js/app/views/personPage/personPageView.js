@@ -19,7 +19,6 @@ define([
 
 		render: function() {
 			var personDetailsView = new PersonDetailsView({
-				el: $(".credit-details"),
 				url: {
 					api_key: this.params.url.api_key,
 					personId: this.params.url.personId
@@ -27,7 +26,6 @@ define([
 			});
 
 			var personMoviesView = new PersonMoviesView({
-				el: $(".person-movies"),
 				url: {
 					api_key: this.params.url.api_key,
 					personId:this.params.url.personId
@@ -37,8 +35,15 @@ define([
 			personDetailsView.render();
 			personMoviesView.render();
 
-			personDetailsView.on("rendered", checkIfSubviewsRendered);
-			personMoviesView.on("rendered", checkIfSubviewsRendered);
+			personDetailsView.on("rendered", function() {
+				$(".person-details").append(this.$el);
+				checkIfSubviewsRendered();
+			});
+
+			personMoviesView.on("rendered", function() {
+				$(".person-movies").append(this.$el);
+				checkIfSubviewsRendered();
+			});
 
 			var self = this;
 			function checkIfSubviewsRendered() {

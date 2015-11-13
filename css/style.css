@@ -152,6 +152,11 @@ a:hover {
 }
 
 /* Header Layout */
+.l-header .nav-find-input {
+  position: relative;
+  outline: none;
+}
+
 /* Footer Layout */
 .l-footer {
   margin: 0;
@@ -222,6 +227,22 @@ a:hover {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
+}
+
+.autocomplete {
+  position: fixed;
+  width: 60%;
+  left: 20%;
+  top: 60px;
+  height: 600px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  border: 1px solid #E7E7E7;
+  overflow: hidden;
+  z-index: 100;
+}
+.autocomplete .nicescroll {
+  overflow: hidden;
 }
 
 .fa-heart-o:hover {
@@ -297,13 +318,59 @@ a:hover {
 }
 
 .m-composite-list > li {
+  position: relative;
   margin: 3em 0;
+  padding: 2em;
+  border: 1px solid #E7E7E7;
+  border-radius: 10px;
+}
+.m-composite-list li.removed-item {
+  animation: removed-item-animation 0.8s cubic-bezier(0.65, -0.02, 0.72, 0.29);
+}
+@keyframes removed-item-animation {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateX(50px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-800px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-800px);
+  }
+}
+.m-composite-list .fa-times {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #E7E7E7;
+  cursor: pointer;
+}
+.m-composite-list .fa-times:hover {
+  color: #aaa;
 }
 .m-composite-list h3 {
   padding: 0 0 .5em 0;
   margin: 0 0 .5em 0;
   font: 28px/42px "Open Sans", Helvetica, Arial, sans-serif;
   border-bottom: 1px solid #E7E7E7;
+}
+
+.spoiler-btn {
+  display: inline-block;
+  width: 100%;
+  padding: .5rem 0;
+  margin-bottom: 21px;
+  text-align: center;
+  font-size: 19.6px;
+  background-color: #E7E7E7;
+  cursor: pointer;
 }
 
 /* Specific page styles */

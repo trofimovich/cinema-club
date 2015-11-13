@@ -71,3 +71,20 @@
 		@include border-radius($common-border-radius);
 	}
 }
+
+.autocomplete {
+	position: fixed;
+	width: 60%;
+	left: 20%;
+	top: 60px;
+	height: 600px;
+	background: rgba(255,255,255, .9);
+	border-radius: 10px;
+	border: 1px solid $primary-color;
+	overflow:hidden;
+	z-index: 100;
+	
+	.nicescroll {
+		overflow: hidden;
+	}
+}

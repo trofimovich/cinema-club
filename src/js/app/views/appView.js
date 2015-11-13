@@ -2,29 +2,34 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"app/collections/movieCollection",
 	"app/templates/cinemaClubTmpls",
-	"app/views/movieListView",
-	"app/views/mainPageView",
-	"app/views/moviePageView",
+	"app/collections/itemsCollection",
+	"app/views/mainPage/mainPageView",
+	"app/views/moviePage/moviePageView",
 	"app/views/personPage/personPageView",
-	"app/views/favouritesPageView",
-	"app/helpers/preloader"
+	"app/views/favouritesPage/favouritesPageView",
+	"app/helpers/preloader",
+	"nicescroll"
 ], function(
 	$,
 	_,
 	Backbone,
-	MovieCollection,
 	cinemaClubTmpls,
-	MovieListView,
+	ItemsCollection,
 	MainPageView,
 	MoviePageView,
 	PersonPageView,
 	FavouritesPageView,
-	preloader) {
+	preloader,
+	nicescroll) {
 
 	var AppView = Backbone.View.extend({
+		
 		el: $("body"),
+
+		events: {
+			"keyup .nav-find-input": "search"
+		},
 
 		template: _.template(cinemaClubTmpls["appTmpl"]),
 
@@ -45,7 +50,6 @@ define([
 
 			var pageView,
 				url;
-
 
 			if(pageName === "index") {
 				preloader.startPreloader();
@@ -86,12 +90,74 @@ define([
 			if(pageName === "favourites") {
 				pageView = new FavouritesPageView(
 									{
-										el: $(".page-content"),
 										section: params
 									});
-			}
 
-		}
+				$(".page-content").html(pageView.render().el);
+			}
+		},
+
+		timerId: 0,
+		autocompleteTemplate: _.template(cinemaClubTmpls["autocomplete"]),
+		listItemTemplate: _.template(cinemaClubTmpls["listItem"]),
+
+		search: function(e) {
+			$("body").on("click", function(e) {
+				if(self.$el.find(".autocomplete") && !$(e.currentTarget).hasClass("autocomplete")) {
+					self.$el.find(".autocomplete").detach();
+				}	
+			}, self);
+
+			var search;
+			search = $(e.currentTarget).val();
+
+			if(this.timerId) {
+				clearTimeout(this.timerId);
+			}
+			
+			this.timerId = setTimeout(makeSearchCall, 800);
+
+			var self = this;
+			function makeSearchCall() {
+
+
+				if(search === "") {
+					self.$el.find(".autocomplete").detach();
+					return;
+				}
+
+				var resultsCollection = new ItemsCollection({
+					api_key: "5905778f9ef16e30fdd2407c34a27b03",
+					search: search
+				});
+
+				self.listenTo(resultsCollection, "sync", function() {
+					if(self.$el.find(".autocomplete")) { self.$el.find(".autocomplete").detach(); }
+
+					self.$el.append(self.autocompleteTemplate({}));
+
+					resultsCollection.each(function(element, index) {
+						self.$el.find(".autocomplete .m-composite-list").append(self.listItemTemplate(element.toJSON()));
+					});
+
+					self.$el.find(".autocomplete").niceScroll({
+						touchbehavior: true,
+						cursorcolor: "#333",
+						cursoropacitymax: 0.3,
+						autohidemode: false,
+						railpadding:{top:0,right:5},
+						cursorborder: '0',
+						zindex: 999999
+					}).resize();
+
+					console.log(resultsCollection);
+				});
+
+				resultsCollection.trigger("sync");
+				resultsCollection.fetch({ reset: true, ajaxSync: true });
+			}
+		},
+
 	});
 
 	return AppView;

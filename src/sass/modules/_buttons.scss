@@ -1,0 +1,10 @@
+.spoiler-btn {
+	display: inline-block;
+	width: 100%;
+	padding: .5rem 0;
+	margin-bottom: $baseline;
+	text-align: center;
+	font-size: $base-font-size*1.4;
+	background-color: $primary-color;
+	cursor: pointer;
+}

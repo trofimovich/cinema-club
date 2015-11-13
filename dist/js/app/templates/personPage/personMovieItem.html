@@ -1,0 +1,12 @@
+<li class="col-md-2 col-sm-4 image-card">
+	<div >
+		<p class="card-title"><a href="/#movie/<%= id %>"><%= title %></a> <% if(isInFavourites) { %> <i class="fa fa-heart"></i> <% } %></p>
+		<p class="card-subtitle"><%= character %></p>
+		
+		<a href="/#movie/<%= id %>">
+			<object type="image/jpg" data="http://image.tmdb.org/t/p/w185/<%= posterPath %>" alt="<%= title %>">
+				<img src='../../../images/thumbnail-vertical.png'>
+			</object>
+		</a>
+	</div>
+</li>

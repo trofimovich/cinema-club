@@ -1,0 +1,74 @@
+<h2><%= title %>
+	<a href="#" title="Add to favourites">
+		<i <% if(isInFavourites) { %> class="fa fa-heart" <% } else { %> class="fa fa-heart-o" <% } %>></i>
+	</a>
+</h2>
+<div class="row">
+		<div class="col-md-6 col-sm-12 m-images-composite">
+			<a href="http://image.tmdb.org/t/p/original/<%= backdropPath %>" target="_blank">
+				<object type="image/jpg" data="http://image.tmdb.org/t/p/w600/<%= backdropPath %>" alt="<%= title %>">
+					<img src='../../../images/thumbnail-horizontal.png'>
+				</object>
+			</a>
+
+			<ul class="l-list-inline l-list-col-3">
+				<li>
+					<a href="http://image.tmdb.org/t/p/original/<%= backdropPath %>" target="_blank">
+						<object type="image/jpg" data="http://image.tmdb.org/t/p/w600/<%= backdropPath %>" alt="<%= title %>">
+							<img src='../../../images/thumbnail-horizontal.png'>
+						</object>
+					</a>
+				</li>
+				<li>
+					<a href="http://image.tmdb.org/t/p/original/<%= backdropPath %>" target="_blank">
+						<object type="image/jpg" data="http://image.tmdb.org/t/p/w600/<%= backdropPath %>" alt="<%= title %>">
+							<img src='../../../images/thumbnail-horizontal.png'>
+						</object>
+					</a>
+				</li>
+				<li>
+					<a href="http://image.tmdb.org/t/p/original/<%= backdropPath %>" target="_blank">
+						<object type="image/jpg" data="http://image.tmdb.org/t/p/w600/<%= backdropPath %>" alt="<%= title %>">
+							<img src='../../../images/thumbnail-horizontal.png'>
+						</object>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="col-md-6 col-sm-12">
+			<ul class="l-list m-stats-list">
+				<li>
+					<span class="stat-name">Rating</span>
+					<span class="stat-value"><%= voteAverage %> <i class="fa fa-star"></i></span>
+				</li>
+				<li>
+					<span class="stat-name">Release Date</span>
+					<span class="stat-value"><%= releaseDate %></span>
+				</li>
+				<li>
+					<span class="stat-name">Time</span>
+					<span class="stat-value"><%= runtime %></span>
+				</li>
+				<li>
+					<span class="stat-name">Budget</span>
+					<span class="stat-value">$<%= budget %></span>
+				</li>
+				<li>
+					<span class="stat-name">Revenue</span>
+					<span class="stat-value">$<%= revenue %></span>
+				</li>
+			</ul>
+		</div>
+</div>
+
+<section class="l-description">
+	<h3>Description:</h3>
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<p>
+				<%= overview %>
+			</p>
+		</div>
+	</div>
+</section> <!-- /l-description -->

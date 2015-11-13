@@ -7,7 +7,6 @@ define([
 		model: VideoModel,
 
 		url: function() {
-			console.log(this.params)
 			return [
 				"https://api.themoviedb.org/3/movie/",
 				this.params.movieId,

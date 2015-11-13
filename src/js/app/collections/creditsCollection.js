@@ -2,13 +2,12 @@ define([
 	"underscore",
 	"backbone",
 	"backbone-local-storage",
-	"app/models/creditModel",
-], function(_, Backbone, localstorage, CreditModel) {
+	"app/models/personModel",
+], function(_, Backbone, localstorage, PersonModel) {
 	var CreditsCollection = Backbone.Collection.extend({
-		model: CreditModel,
+		model: PersonModel,
 
 		url: function() {
-			console.log(this.params)
 			return [
 				"https://api.themoviedb.org/3/movie/",
 				this.params.movieId,
@@ -34,5 +33,5 @@ define([
 		}
 	});
 
-	return CreditsCollection
+	return CreditsCollection;
 });

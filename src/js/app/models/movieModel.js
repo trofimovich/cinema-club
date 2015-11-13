@@ -24,8 +24,8 @@ define([
 
 		localStorage: new Backbone.LocalStorage("fav-movie"),
 
-		initialize: function(params) {
-			this.params = params;
+		initialize: function(attrs, opts) {
+			this.params = opts;
 		},
 
 		parse: function(response) {
@@ -37,7 +37,8 @@ define([
 			model.posterPath = response.poster_path || response.posterPath;
 			model.voteAverage = response.vote_average || response.voteAverage;
 			model.releaseDate = response.releaseDate || helpers.format(new Date(response.release_date));
-			model.runtime = helpers.convertTime(response.runtime);
+			model.runtimeInMin = response.runtime;
+			model.runtime = helpers.convertTime(model.runtimeInMin);
 			model.budget = response.budget;
 			model.revenue = response.revenue;
 			model.overview = response.overview;

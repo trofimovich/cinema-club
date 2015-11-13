@@ -1,0 +1,1 @@
+define(["jquery","underscore","backbone","app/models/movieModel","app/templates/cinemaClubTmpls"],function(e,t,n,r,i){var s=n.View.extend({tagName:"div",className:"movie-card",template:t.template(i.movieCard),events:{},initialize:function(){this.model.bind("change",this.render)},render:function(){return this.$el.html(this.template(this.model.toJSON())),this}});return s});

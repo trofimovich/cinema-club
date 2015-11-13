@@ -2,10 +2,11 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"app/models/creditModel",
+	"app/models/personModel",
 	"app/templates/cinemaClubTmpls"
-], function($, _, Backbone, CreditModel, cinemaClubTmpls) {
+], function($, _, Backbone, PersonModel, cinemaClubTmpls) {
 	var MovieDetailsView = Backbone.View.extend({
+		tagName: "div",
 
 		template: _.template(cinemaClubTmpls["personDetails"]),
 
@@ -19,16 +20,17 @@ define([
 
 		render: function() {
 			this.isRendered = false;
-			this.model = new CreditModel({
+
+
+			this.model = new PersonModel({}, {
 				api_key: this.params.url.api_key,
 				personId: this.params.url.personId
 			});
 			
-			var self = this;
-			this.model.on("change", function() {
-				self.$el.html(self.template(self.model.toJSON()));
-				self.isRendered = true;
-				self.trigger("rendered");
+			this.listenTo(this.model, "sync", function() {
+				this.$el.html(this.template(this.model.toJSON()));
+				this.isRendered = true;
+				this.trigger("rendered");
 			});
 			
 			this.model.fetch({ reset: true, ajaxSync: true });

@@ -8,6 +8,10 @@ define([
 function($, _, Backbone, VideoCollection, cinemaClubTmpls) {
 	var MoviePageView = Backbone.View.extend({
 		
+		tagName: "ul",
+
+		className: "l-list m-cards-list",
+		
 		template: _.template(cinemaClubTmpls["videoBlock"]),
 
 		initialize: function(params) {

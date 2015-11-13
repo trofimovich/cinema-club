@@ -21,7 +21,10 @@ define([
 	
 	"requirejs-text!app/templates/listPage/listPage.html!strip",
 	"requirejs-text!app/templates/listPage/movieListItem.html!strip",
-	"requirejs-text!app/templates/listPage/personListItem.html!strip"
+	"requirejs-text!app/templates/listPage/personListItem.html!strip",
+	
+	"requirejs-text!app/templates/common/autocomplete.html!strip",
+	"requirejs-text!app/templates/common/listItem.html!strip"
 
 ], function(
 	requirejsText,
@@ -42,7 +45,9 @@ define([
 	personMovieItem,
 	listPage,
 	movieListItem,
-	personListItem) {
+	personListItem,
+	autocomplete,
+	listItem) {
 	
 	var templates = {
 		appTmpl: appTmpl,
@@ -79,7 +84,11 @@ define([
 
 		movieListItem: movieListItem,
 
-		personListItem: personListItem
+		personListItem: personListItem,
+
+		autocomplete: autocomplete,
+
+		listItem: listItem
 	}
 
 	return templates;

@@ -8,6 +8,8 @@ define([
 ], function($, _, Backbone, Bootstrap, MovieCollection, cinemaClubTmpls) {
 	var CreditsBlockView = Backbone.View.extend({
 
+		tagName: "div",
+
 		template: _.template(cinemaClubTmpls["personMoviesBlock"]),
 		creditItemTemplate: _.template(cinemaClubTmpls["personMovieItem"]),
 

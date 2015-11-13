@@ -1,0 +1,1 @@
+define(["jquery","underscore","backbone","app/views/movieCardView","app/templates/cinemaClubTmpls"],function(e,t,n,r,i){var s=r.extend({tagName:"div",className:"movie-card movie-main-card",template:t.template(i.movieMainCard)});return s});

@@ -1,17 +1,18 @@
 define([
 	"underscore",
 	"backbone",
-	"app/models/videoModel"
-], function(_, Backbone, VideoModel) {
+	"app/models/videoModel",
+	"app/config"
+], function(_, Backbone, VideoModel, config) {
 	var MovieCollection = Backbone.Collection.extend({
 		model: VideoModel,
 
 		url: function() {
 			return [
-				"https://api.themoviedb.org/3/movie/",
-				this.params.movieId,
-				"/videos?api_key=",
-				this.params.api_key
+				"https://api.themoviedb.org/3/",
+				this.params.url,
+				"api_key=",
+				config.API_KEY
 			].join("");
 		},
 
@@ -21,14 +22,6 @@ define([
 
 		parse: function(response) {
 			return response.results;
-		},
-
-		onFetchSuccess: function(collection, response) {
-			console.log("fetched");
-		},
-
-		onFetchError: function(collection, response) {
-			throw new Error("Movies collection fetch error");
 		}
 	});
 

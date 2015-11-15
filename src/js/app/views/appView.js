@@ -8,8 +8,10 @@ define([
 	"app/views/moviePage/moviePageView",
 	"app/views/personPage/personPageView",
 	"app/views/favouritesPage/favouritesPageView",
+	"backbone-local-storage",
 	"app/helpers/preloader",
-	"nicescroll"
+	"nicescroll",
+	"app/config"
 ], function(
 	$,
 	_,
@@ -20,8 +22,10 @@ define([
 	MoviePageView,
 	PersonPageView,
 	FavouritesPageView,
+	localstorage,
 	preloader,
-	nicescroll) {
+	nicescroll,
+	config) {
 
 	var AppView = Backbone.View.extend({
 		
@@ -34,14 +38,13 @@ define([
 		template: _.template(cinemaClubTmpls["appTmpl"]),
 
 		initialize: function() {
-			//this.render();
-			//var mainPageView = new MainPageView({ el: $(".page-content") });
+			// initialize collections that holds 'Favourite Movies' and 'Favourite Persons'
+			favMovies = new ItemsCollection({ localStorage: new Backbone.LocalStorage("fav-movie") });
+			favPersons = new ItemsCollection({ localStorage: new Backbone.LocalStorage("fav-person") });
 		},
 
 		render: function() {
-			var renderedTmpl = this.template({
-			});
-
+			var renderedTmpl = this.template();
 			this.$el.html(renderedTmpl);
 		},
 
@@ -53,11 +56,8 @@ define([
 
 			if(pageName === "index") {
 				preloader.startPreloader();
-				pageView = new MainPageView(
-									{
-										el: $(".page-content")
-									});
-				pageView.on("rendered", preloader.stopPreloader);
+				pageView = new MainPageView({ el: $(".page-content") });
+				this.listenTo(pageView, "rendered", preloader.stopPreloader);
 			}
 
 			if(pageName === "movie") {
@@ -65,12 +65,9 @@ define([
 				pageView = new MoviePageView(
 									{
 										el: $(".page-content"),
-										url: {
-											api_key: "5905778f9ef16e30fdd2407c34a27b03",
-											movieId: params
-										}
+										movieId: params
 									});
-				pageView.on("rendered", preloader.stopPreloader);
+				this.listenTo(pageView, "rendered", preloader.stopPreloader);
 			}
 
 			if(pageName === "person") {
@@ -78,12 +75,9 @@ define([
 				pageView = new PersonPageView(
 									{
 										el: $(".page-content"),
-										url: {
-											api_key: "5905778f9ef16e30fdd2407c34a27b03",
-											personId: params
-										}
+										personId: params
 									});
-				pageView.on("rendered", preloader.stopPreloader);
+				this.listenTo(pageView, "rendered", preloader.stopPreloader);
 			}
 
 
@@ -102,13 +96,14 @@ define([
 		listItemTemplate: _.template(cinemaClubTmpls["listItem"]),
 
 		search: function(e) {
-			$("body").on("click", function(e) {
-				if(self.$el.find(".autocomplete") && !$(e.currentTarget).hasClass("autocomplete")) {
-					self.$el.find(".autocomplete").detach();
-				}	
-			}, self);
-
 			var search;
+
+			$("body").on("click", function(e) {
+				if(this.$el.find(".autocomplete") && !$(e.currentTarget).hasClass("autocomplete")) {
+					this.$el.find(".autocomplete").detach();
+				}	
+			}, this);
+
 			search = $(e.currentTarget).val();
 
 			if(this.timerId) {
@@ -118,8 +113,8 @@ define([
 			this.timerId = setTimeout(makeSearchCall, 800);
 
 			var self = this;
-			function makeSearchCall() {
 
+			function makeSearchCall() {
 
 				if(search === "") {
 					self.$el.find(".autocomplete").detach();
@@ -127,7 +122,7 @@ define([
 				}
 
 				var resultsCollection = new ItemsCollection({
-					api_key: "5905778f9ef16e30fdd2407c34a27b03",
+					api_key: config.API_KEY,
 					search: search
 				});
 
@@ -149,8 +144,6 @@ define([
 						cursorborder: '0',
 						zindex: 999999
 					}).resize();
-
-					console.log(resultsCollection);
 				});
 
 				resultsCollection.trigger("sync");

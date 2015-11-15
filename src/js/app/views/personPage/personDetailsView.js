@@ -16,28 +16,34 @@ define([
 
 		initialize: function(params) {
 			this.params = params;
-		},
-
-		render: function() {
 			this.isRendered = false;
 
-
 			this.model = new PersonModel({}, {
-				api_key: this.params.url.api_key,
-				personId: this.params.url.personId
+				personId: this.params.personId
 			});
 			
 			this.listenTo(this.model, "sync", function() {
-				this.$el.html(this.template(this.model.toJSON()));
+				this.render();
 				this.isRendered = true;
 				this.trigger("rendered");
-			});
+			})
 			
 			this.model.fetch({ reset: true, ajaxSync: true });
 		},
 
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+		},
+
 		toggleFavourites: function(e) {
 			e.preventDefault();
+
+			if(this.$el.find(".add-to-favourites").hasClass("fa-heart-o")) {
+				this.$el.find(".add-to-favourites").removeClass("fa-heart-o").addClass("fa-heart");
+			} else {
+				this.$el.find(".add-to-favourites").removeClass("fa-heart").addClass("fa-heart-o");
+			}
+
 			this.model.toggleFavourites();
 		}
 	});

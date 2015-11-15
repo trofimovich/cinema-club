@@ -2,10 +2,10 @@ define([
 	"jquery",
 	"underscore",
 	"backbone",
-	"app/models/movieModel",
-	"app/models/personModel",
+	"app/models/itemModel",
+	"backbone-local-storage",
 	"app/templates/cinemaClubTmpls"
-], function($, _, Backbone, MovieModel, PersonModel, cinemaClubTmpls) {
+], function($, _, Backbone, ItemModel, localstorage, cinemaClubTmpls) {
 	var ListItemView = Backbone.View.extend({
 		tagName: "li",
 
@@ -13,17 +13,18 @@ define([
 			"click .fa-times": "removeFromFavourites"
 		},
 
-		template: _.template(cinemaClubTmpls["movieListItem"]),
-
-
 		initialize: function(params) {
+
+			this.model = new ItemModel(params);
 
 			switch (this.model.get("type")) {
 				case "movie":
 					this.template = _.template(cinemaClubTmpls["movieListItem"]);
+					this.model.localStorage = new Backbone.LocalStorage("fav-movie");
 					break;
 				case "person":
 					this.template = _.template(cinemaClubTmpls["personListItem"]);
+					this.model.localStorage = new Backbone.LocalStorage("fav-person");
 					break;
 			}
 		},
@@ -34,11 +35,11 @@ define([
 		},
 
 		removeFromFavourites: function(e) {
-			console.log("Removing from favourites" + this.model.get("title"));
 			var self = this;
 
 			this.$el.addClass("removed-item").one("webkitAnimationEnd oanimationend msAnimationEnd animationend", function(e) {
 				self.model.destroy();
+				self.trigger("removed");
 			});
 		}
 	});

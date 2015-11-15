@@ -1,9 +1,11 @@
 define([
 	"underscore",
 	"backbone",
+	"app/models/itemModel",
 	"backbone-local-storage",
-	"app/helpers/helpersFn"
-], function(_, Backbone, localstorage, helpers) {
+	"app/helpers/helpersFn",
+	"app/config"
+], function(_, Backbone, ItemModel, localstorage, helpers, config) {
 	var MovieModel = Backbone.Model.extend({
 		defaults: {
 			"id": 0,
@@ -54,7 +56,7 @@ define([
 				"https://api.themoviedb.org/3/movie/",
 				this.params.movieId,
 				"?api_key=",
-				this.params.api_key
+				config.API_KEY
 			].join("");
 		},
 
@@ -63,8 +65,17 @@ define([
 				this.set("isInFavourites", false);
 				this.destroy();
 			} else {
+				favMovies.create(new ItemModel({
+					"id": this.get("id"),
+					"title": this.get("title"),
+					"type": this.get("type"),
+					"imagePath": this.get("backdropPath"),
+					"voteAverage": this.get("voteAverage"),
+					"isInFavourites": true,
+					"description": this.get("overview")
+				}));
+
 				this.set("isInFavourites", true);
-				this.save();
 			}
 		}
 	});

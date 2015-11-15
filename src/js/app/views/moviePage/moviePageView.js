@@ -21,54 +21,37 @@ function($, _, Backbone, MovieDetailsView, PersonBlockView, VideoBlockView, cine
 
 		render: function() {
 			var movieDetailsView = new MovieDetailsView({
-				url: {
-					api_key: this.params.url.api_key,
-					movieId: this.params.url.movieId
-				}
+				movieId: this.params.movieId
 			});
 
 			var personBlockView = new PersonBlockView({
-				url: {
-					api_key: this.params.url.api_key,
-					movieId: this.params.url.movieId
-				}
+				url: "movie/" + this.params.movieId + "/credits?"
 			});
 
 			var videoBlockView = new VideoBlockView({
-				url: {
-					api_key: this.params.url.api_key,
-					movieId: this.params.url.movieId
-				}
+				url: "movie/" + this.params.movieId + "/videos?"
 			});
 
-			movieDetailsView.render();
-			personBlockView.render();
-			videoBlockView.render();
-
-
-			
-			movieDetailsView.on("rendered", function() {
-				$(".movie-details").append(this.$el);
-				checkIfSubviewsRendered();
+			this.listenTo(movieDetailsView, "rendered", function() {
+				$(".movie-details").append(movieDetailsView.$el);
+				checkIfSubviewsRendered.call(this);
 			});
 
-			personBlockView.on("rendered", function() {
-				$(".movie-person-block").append(this.$el);
-				checkIfSubviewsRendered();
+			this.listenTo(videoBlockView, "rendered", function() {
+				$(".movie-video-block").append(videoBlockView.$el);
+				checkIfSubviewsRendered.call(this);
 			});
-			
-			videoBlockView.on("rendered", function() {
-				$(".movie-video-block").append(this.$el);
-				checkIfSubviewsRendered();
-			});
-			
 
-			var self = this;
+			this.listenTo(personBlockView, "rendered", function() {
+				$(".movie-person-block").append(personBlockView.$el);
+				checkIfSubviewsRendered.call(this);
+			});
+
 			function checkIfSubviewsRendered() {
 				if(movieDetailsView.isRendered && videoBlockView.isRendered && personBlockView.isRendered) {
-					self.trigger("rendered");
+					this.trigger("rendered");
 				} 
-			}
+			};
 		}
 	});
 

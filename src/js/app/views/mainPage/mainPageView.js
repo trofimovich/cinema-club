@@ -4,14 +4,16 @@ define([
 	"backbone",
 	"app/collections/movieCollection",
 	"app/templates/cinemaClubTmpls",
-	"app/views/mainPage/movieListView"
+	"app/views/mainPage/movieListView",
+	"app/views/moviePage/personBlockView"
 ], function(
 	$,
 	_,
 	Backbone,
 	MovieCollection,
 	cinemaClubTmpls,
-	MovieListView) {
+	MovieListView,
+	PersonBlockView) {
 
 	var MainPageView = Backbone.View.extend({
 
@@ -19,39 +21,45 @@ define([
 
 		initialize: function() {
 			this.render();
-
-			var onScreens = new MovieListView({
-												el: $(".on-screens-content"),
-												collection: new MovieCollection({}),
-												url: "https://api.themoviedb.org/3/movie/now_playing?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1"
-											});
-			
-			var popular = new MovieListView({
-												el: $(".popular-content"),
-												collection: new MovieCollection({}),
-												url: "https://api.themoviedb.org/3/movie/popular?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1"
-											});
-			
-			var topRated = new MovieListView({
-												el: $(".top-rated-content"),
-												collection: new MovieCollection({}),
-												url: "https://api.themoviedb.org/3/movie/top_rated?api_key=5905778f9ef16e30fdd2407c34a27b03&page=1"
-											});
-
-			onScreens.on("reset", onScreens.render);
-			popular.on("reset", popular.render);
-			topRated.on("reset", topRated.render);
-
-			this.listenTo(onScreens, "reset", function() {
-				this.trigger("rendered");
-			});
 		},
 
 		render: function() {
-			var renderedTmpl = this.template({
+			this.$el.html(this.template());
+
+			var onScreens = new MovieListView({
+				url: "movie/now_playing?page=1&"
+			});
+			
+			var popular = new MovieListView({
+				url: "movie/popular?page=1&"
+			});
+			
+			var topRated = new MovieListView({
+				url: "movie/top_rated?page=1&"
 			});
 
-			this.$el.html(renderedTmpl);
+			var trendingActors = new PersonBlockView({
+				url: "person/popular?"
+			});
+
+			this.listenTo(onScreens, "rendered", function() {
+				this.$el.find(".on-screens-content").append(onScreens.$el);
+				this.trigger("rendered");
+			});
+
+			this.listenTo(popular, "rendered", function() {
+				this.$el.find(".popular-content").append(popular.$el);
+			});
+
+			this.listenTo(topRated, "rendered", function() {
+				this.$el.find(".top-rated-content").append(topRated.$el);
+			});
+
+			this.listenTo(trendingActors, "rendered", function() {
+				this.$el.find(".trending-actors-content").append(trendingActors.$el);
+			});
+
+			return this;
 		}
 	});
 

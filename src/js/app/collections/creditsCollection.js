@@ -3,16 +3,17 @@ define([
 	"backbone",
 	"backbone-local-storage",
 	"app/models/personModel",
-], function(_, Backbone, localstorage, PersonModel) {
+	"app/config"
+], function(_, Backbone, localstorage, PersonModel, config) {
 	var CreditsCollection = Backbone.Collection.extend({
 		model: PersonModel,
 
 		url: function() {
 			return [
-				"https://api.themoviedb.org/3/movie/",
-				this.params.movieId,
-				"/credits?api_key=",
-				this.params.api_key
+				"https://api.themoviedb.org/3/",
+				this.params.url,
+				"api_key=",
+				config.API_KEY
 			].join("");
 		},
 
@@ -21,15 +22,7 @@ define([
 		},
 
 		parse: function(response) {
-			return response.cast;
-		},
-
-		onFetchSuccess: function(collection, response) {
-			console.log("fetched");
-		},
-
-		onFetchError: function(collection, response) {
-			throw new Error("Movies collection fetch error");
+			return response.cast || response.results;
 		}
 	});
 

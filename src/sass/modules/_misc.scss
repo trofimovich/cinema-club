@@ -31,12 +31,12 @@
 	.movie-title {
 		margin: 0;
 		padding: 0;
-
 		font: #{$base-font-size* 1.4 }/#{$baseline*1.4} $primary-font;
 	}
 
 	.movie-rating {
 		@extend .movie-title;
+		width: auto;
 
 		.fa-star {
 		}

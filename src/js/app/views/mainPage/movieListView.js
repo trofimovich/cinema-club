@@ -21,18 +21,18 @@ define([
 		template: _.template(cinemaClubTmpls["mainPageBlock"]),
 
 		initialize: function(params) {
-
-			this.collection.url = params.url;
+			this.params = params;
+			this.collection = new MovieCollection({ url: this.params.url })
 
 			this.collection.fetch({ reset: true });
 
 			this.listenTo(this.collection, "sync", function() {
-				this.trigger("reset");
+				this.render();
+				this.trigger("rendered");
 			});
 		},
 
 		render: function() {
-
 			var i = 0,
 				movieVw = {},
 				mainPageBlockVars = {

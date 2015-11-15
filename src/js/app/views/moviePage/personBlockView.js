@@ -6,15 +6,26 @@ define([
 	"app/collections/creditsCollection",
 	"app/templates/cinemaClubTmpls"
 ], function($, _, Backbone, Bootstrap, CreditsCollection, cinemaClubTmpls) {
+	
 	var PersonBlockView = Backbone.View.extend({
-		tagName: "div",
-
 		template: _.template(cinemaClubTmpls["creditsBlock"]),
 		creditItemTemplate: _.template(cinemaClubTmpls["creditItem"]),
 
 		initialize: function(params) {
 			this.params = params;
-			this.el = params.el;
+			this.isRendered = false;
+
+			this.collection = new CreditsCollection({
+				url: this.params.url
+			});
+
+			this.listenTo(this.collection, "sync", function() {
+				this.render();
+				this.isRendered = true;
+				this.trigger("rendered");
+			});
+
+			this.collection.fetch({ ajaxSync: true });
 		},
 
 		events: {
@@ -22,39 +33,22 @@ define([
 		},
 
 		render: function() {
-			var self = this,
-				creditsVisibleHtml = "",
+			var	creditsVisibleHtml = "",
 				creditsUnderSpoilerHtml = "";
 
-			this.isRendered = false;
+			this.collection.each(function(element, index) {
+				if(index < 6) {
+					// put first 6 credits visible, other credits put under spoiler
+					creditsVisibleHtml += this.creditItemTemplate(element.toJSON());
+				} else {
+					creditsUnderSpoilerHtml += this.creditItemTemplate(element.toJSON());
+				}
+			}, this);
 
-			this.collection = new CreditsCollection({
-				api_key: this.params.url.api_key,
-				movieId: this.params.url.movieId
-			});
-
-
-			this.collection.on("sync", function() {
-				this.each(function(element, index) {
-					if(index < 6) {
-						// put first 6 credits visible, other credits put under spoiler
-						creditsVisibleHtml += self.creditItemTemplate(element.toJSON());
-					} else {
-						creditsUnderSpoilerHtml += self.creditItemTemplate(element.toJSON());
-					}
-
-				});
-
-				self.$el.append(self.template({
-					creditsVisible: creditsVisibleHtml,
-					creditsUnderSpoiler: creditsUnderSpoilerHtml
-				}));
-
-				self.isRendered = true;
-				self.trigger("rendered");
-			});
-
-			this.collection.fetch({ "reset" : true, ajaxSync: true });
+			this.$el.append(this.template({
+				creditsVisible: creditsVisibleHtml,
+				creditsUnderSpoiler: creditsUnderSpoilerHtml
+			}));
 		},
 
 		expandSpoiler: function(e) {

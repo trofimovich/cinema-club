@@ -2,8 +2,9 @@ define([
 	"underscore",
 	"backbone",
 	"backbone-local-storage",
-	"app/helpers/helpersFn"
-], function(_, Backbone, localStorage, helpers) {
+	"app/helpers/helpersFn",
+	"app/config"
+], function(_, Backbone, localStorage, helpers, config) {
 	var PersonModel = Backbone.Model.extend({
 		defaults: function() {
 			return {
@@ -40,16 +41,16 @@ define([
 			return model;
 		},
 
-		initialize: function(attributes, options) {
-			this.options = options;
+		initialize: function(attributes, opts) {
+			this.params = opts;
 		},
 
 		url: function() {
 			return [
 				"https://api.themoviedb.org/3/person/",
-				this.options.personId,
+				this.params.personId,
 				"?api_key=",
-				this.options.api_key
+				config.API_KEY
 			].join("");
 		},
 
@@ -58,8 +59,17 @@ define([
 				this.set("isInFavourites", false);
 				this.destroy();
 			} else {
+				favPersons.create({
+					"id": this.get("id"),
+					"title": this.get("name"),
+					"type": this.get("type"),
+					"imagePath": this.get("profilePath"),
+					"voteAverage": false,
+					"isInFavourites": true,
+					"description": this.get("biography")
+				});
+
 				this.set("isInFavourites", true);
-				this.save();
 			}
 		}
 	});

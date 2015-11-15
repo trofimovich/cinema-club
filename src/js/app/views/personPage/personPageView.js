@@ -13,42 +13,31 @@ define([
 		initialize: function(params) {
 			this.params = params;
 			this.$el.html(this.template());
-
 			this.render();
 		},
 
 		render: function() {
 			var personDetailsView = new PersonDetailsView({
-				url: {
-					api_key: this.params.url.api_key,
-					personId: this.params.url.personId
-				}
+				personId: this.params.personId
 			});
 
 			var personMoviesView = new PersonMoviesView({
-				url: {
-					api_key: this.params.url.api_key,
-					personId:this.params.url.personId
-				}
-			})
-			
-			personDetailsView.render();
-			personMoviesView.render();
-
-			personDetailsView.on("rendered", function() {
-				$(".person-details").append(this.$el);
-				checkIfSubviewsRendered();
+				personId:this.params.personId
 			});
 
-			personMoviesView.on("rendered", function() {
-				$(".person-movies").append(this.$el);
-				checkIfSubviewsRendered();
+			this.listenTo(personDetailsView, "rendered", function() {
+				$(".person-details").append(personDetailsView.$el);
+				checkIfSubviewsRendered.call(this);
 			});
 
-			var self = this;
+			this.listenTo(personMoviesView, "rendered", function() {
+				$(".person-movies").append(personMoviesView.$el);
+				checkIfSubviewsRendered.call(this);
+			});
+
 			function checkIfSubviewsRendered() {
 				if(personDetailsView.isRendered && personMoviesView.isRendered) {
-					self.trigger("rendered");
+					this.trigger("rendered");
 				} 
 			}
 		}

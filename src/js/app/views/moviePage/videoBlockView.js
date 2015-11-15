@@ -15,31 +15,26 @@ function($, _, Backbone, VideoCollection, cinemaClubTmpls) {
 		template: _.template(cinemaClubTmpls["videoBlock"]),
 
 		initialize: function(params) {
-			this.el = params.el;
 			this.params = params;
+			this.isRendered = false;
+
+			this.collection = new VideoCollection({
+				url: this.params.url
+			});
+
+			this.listenTo(this.collection, "sync", function() {
+				this.render();
+				this.isRendered = true;
+				this.trigger("rendered");
+			});
+
+			this.collection.fetch({ ajaxSync: true });
 		},
 
 		render: function() {
-			this.isRendered = false;
-			
-			var self = this;
-
-			this.collection = new VideoCollection({
-				api_key: this.params.url.api_key,
-				movieId: this.params.url.movieId
-			});
-
-			this.collection.on("reset", function() {
-				self.collection.each(function(element, index) {
-					self.$el.append(self.template(element.toJSON()));
-				});
-
-				self.isRendered = true;
-				self.trigger("rendered");
-			});
-
-			this.collection.fetch({ reset: true });
-			
+			this.collection.each(function(element, index) {
+				this.$el.append(this.template(element.toJSON()));
+			}, this);
 		}
 	});
 

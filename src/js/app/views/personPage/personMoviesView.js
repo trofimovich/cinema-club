@@ -15,7 +15,20 @@ define([
 
 		initialize: function(params) {
 			this.params = params;
-			this.el = params.el;
+			this.isRendered = false;
+			
+			this.collection = new MovieCollection({
+				url: "person/" + this.params.personId + "/movie_credits?"
+			});
+
+
+			this.listenTo(this.collection, "sync", function() {
+				this.render();
+				this.isRendered = true;
+				this.trigger("rendered");
+			});
+
+			this.collection.fetch();
 		},
 
 		events: {
@@ -23,42 +36,22 @@ define([
 		},
 
 		render: function() {
-			var self = this,
-				personMoviesVisibleHtml = "",
+			var personMoviesVisibleHtml = "",
 				personMoviesUnderSpoilerHtml = "";
 
-			this.isRendered = false;
+			this.collection.each(function(element, index) {
+				if(index < 6) {
+					// put first 6 credits visible, other credits put under spoiler
+					personMoviesVisibleHtml += this.creditItemTemplate(element.toJSON());
+				} else {
+					personMoviesUnderSpoilerHtml += this.creditItemTemplate(element.toJSON());
+				}
+			}, this);
 
-			this.collection = new MovieCollection({
-				api_key: this.params.url.api_key,
-				category: "person",
-				itemId: this.params.url.personId,
-				subcategory: "movie_credits"
-			});
-
-			this.collection.fetch({ "reset" : true });
-
-
-			this.collection.on("reset", function() {
-
-				this.each(function(element, index) {
-					if(index < 6) {
-						// put first 6 credits visible, other credits put under spoiler
-						personMoviesVisibleHtml += self.creditItemTemplate(element.toJSON());
-					} else {
-						personMoviesUnderSpoilerHtml += self.creditItemTemplate(element.toJSON());
-					}
-
-				});
-
-				self.$el.append(self.template({
-					personMoviesVisible: personMoviesVisibleHtml,
-					personMoviesUnderSpoiler: personMoviesUnderSpoilerHtml
-				}));
-
-				self.isRendered = true;
-				self.trigger("rendered");
-			});
+			this.$el.append(this.template({
+				personMoviesVisible: personMoviesVisibleHtml,
+				personMoviesUnderSpoiler: personMoviesUnderSpoilerHtml
+			}));
 		},
 
 		expandSpoiler: function(e) {

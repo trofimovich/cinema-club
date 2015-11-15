@@ -1,15 +1,15 @@
 <div class="movie-card-main">
-	<a href="/#movie/<%= id %>">
+	<a href="#movie/<%= id %>">
 		<object type="image/jpg" data="http://image.tmdb.org/t/p/w600/<%=  backdropPath %>" alt="<%= title %>">
-			<img src="../../../images/thumbnail-horizontal.png" alt="<%= title %>">
+			<img src="images/thumbnail-horizontal.png" alt="<%= title %>">
 		</object>
 	</a>
 	<div class="l-clearfix">
-		<div class="align-left">
-			<h3 class="movie-title"><a href="/#movie/<%= id %>"><%= title %></a></h3>
-		</div>
 		<div class="align-right">
 			<p class="movie-rating"><%= voteAverage %> <i class="fa fa-star"></i></p>
+		</div>
+		<div>
+			<h3 class="movie-title"><a href="#movie/<%= id %>"><%= title %></a></h3>
 		</div>
 	</div>
 </div>

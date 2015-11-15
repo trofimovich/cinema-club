@@ -2,7 +2,7 @@
 @import "compass";
 
 /* Bootstrap */
-@import "../vendor/bootstrap/dist/css/bootstrap.min.css";
+@import "/src/vendor/bootstrap/dist/css/bootstrap.min.css";
 
 /* Utilites */
 @import "utilities/settings";
@@ -12,7 +12,7 @@
 @import "base/base";
 
 /* Fonts */
-@import "../vendor/font-awesome/css/font-awesome.min.css";
+@import "/src/vendor/font-awesome/css/font-awesome.min.css";
 @import "fonts/fonts";
 
 /* Layout styles */

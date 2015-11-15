@@ -1,7 +1,12 @@
 var gulp = require("gulp"),
 	gutil = require("gulp-util"),
 	connect = require("gulp-connect"),
-	compass = require("gulp-compass");
+	compass = require("gulp-compass"),
+	minifyCSS = require("gulp-minify-css"),
+	rjs = require("gulp-requirejs"),
+	uglify = require("gulp-uglify"),
+	minifyHTML = require("gulp-minify-html"),
+	replaceHTML = require("gulp-html-replace");
 
 env = process.env.NODE_ENV || "development";
 
@@ -14,6 +19,7 @@ if(env === "development") {
 }
 
 var templateSources = "src/js/app/templates/*.html";
+
 var jsSources = [
 					"src/js/*.js",
 					"src/js/app/*.js",
@@ -24,7 +30,7 @@ var jsSources = [
 					"src/js/app/views/*.js",
 				];
 
-var sassSources = [
+var styleSources = [
 					"src/sass/*.scss",
 					"src/sass/base/*.scss",
 					"src/sass/fonts/*.scss",
@@ -37,19 +43,79 @@ var sassSources = [
 
 var cssSources = "src/css/*.css";
 
+gulp.task("html", function() {
+	gulp.src(["src/*.html"])
+		.pipe(replaceHTML({ requirejs: "js/main.js" }))
+		.pipe(minifyHTML())
+		.pipe(gulp.dest(outputDir));
+});
+
 gulp.task("compass", function() {
-	gulp.src(sassSources)
+	gulp.src(styleSources)
 		.pipe(compass({
 			sass: "src/sass",
-			image: "src/images",
-			style: "expanded"
+			image: outputDir + "/images/",
+			font: outputDir + "/fonts/",
+			import_path: "",
+			style: sassStyle
 		}))
-		.pipe(gulp.dest("src/css"));
+		.pipe(minifyCSS({ processImport: true }))
+		.pipe(gulp.dest(outputDir + "/css"));
+});
+
+gulp.task("js", function() {
+	rjs({
+		baseUrl: "src/js",
+		out: "main.js",
+		paths: {
+			"jquery": "../vendor/jquery/dist/jquery",
+			"underscore": "../vendor/underscore-amd/underscore",
+			"backbone": "../vendor/backbone-amd/backbone",
+			"bootstrap": "../vendor/bootstrap/dist/js/bootstrap",
+			"requirejs-text": "../vendor/text/text",
+			"backbone-local-storage": "../vendor/backbone.localStorage/backbone.localStorage-min",
+			"backbone-crossdomain": "../vendor/backbone.crossdomain/Backbone.CrossDomain",
+			"nicescroll": "../vendor/jquery.nicescroll/jquery.nicescroll.min",
+			"requireLib": '../vendor/requirejs/require'
+		},
+		name: "main",
+		shim: {
+			"bootstrap": {
+				deps: ["jquery"],
+				exports: "$.fn.popover"
+			},
+
+			"backbone-local-storage": {
+				deps: ["backbone"]
+			},
+
+			"nicescroll": {
+				deps: ["jquery"]
+			}
+		},
+		include: ["requireLib"]
+	})
+	.pipe(uglify())
+	.pipe(gulp.dest(outputDir + "/js"))
+});
+
+gulp.task("images", function() {
+	gulp.src("src/images/*.png")
+		.pipe(gulp.dest(outputDir + "/images"));
+});
+
+gulp.task('fonts', function() {
+	return gulp.src([
+		"src/vendor/font-awesome/fonts/fontawesome-webfont.*",
+		"src/fonts/*.ttf",
+		"src/fonts/*.woff"
+		])
+	.pipe(gulp.dest(outputDir + '/fonts'));
 });
 
 gulp.task("watch", function() {
-	gulp.watch([sassSources], ["compass"]);
-	gulp.watch([templateSources, jsSources, sassSources], ["reload"]);
+	gulp.watch([styleSources], ["compass"]);
+	gulp.watch([templateSources, jsSources, styleSources], ["reload"]);
 });
 
 gulp.task("reload", function() {
@@ -64,4 +130,5 @@ gulp.task("connect", function() {
 	});
 });
 
+gulp.task("build", ["compass", "js", "images", "fonts", "html"]);
 gulp.task("default", ["connect", "watch"]);

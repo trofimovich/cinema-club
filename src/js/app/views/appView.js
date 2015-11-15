@@ -9,6 +9,7 @@ define([
 	"app/views/personPage/personPageView",
 	"app/views/favouritesPage/favouritesPageView",
 	"backbone-local-storage",
+	"backbone-crossdomain",
 	"app/helpers/preloader",
 	"nicescroll",
 	"app/config"
@@ -23,6 +24,7 @@ define([
 	PersonPageView,
 	FavouritesPageView,
 	localstorage,
+	backboneCrossDomain,
 	preloader,
 	nicescroll,
 	config) {

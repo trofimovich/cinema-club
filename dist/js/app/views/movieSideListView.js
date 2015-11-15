@@ -1,1 +1,0 @@
-define(["jquery","underscore","backbone","app/views/movieCardView","app/templates/cinemaClubTmpls"],function(e,t,n,r,i){var s=r.extend({tagName:"li",className:"list-group-item",template:t.template(i.movieSideList)});return s});

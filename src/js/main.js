@@ -6,6 +6,7 @@ require.config({
 		"bootstrap": "../vendor/bootstrap/dist/js/bootstrap",
 		"requirejs-text": "../vendor/text/text",
 		"backbone-local-storage": "../vendor/backbone.localStorage/backbone.localStorage-min",
+		"backbone-crossdomain": "../vendor/backbone.crossdomain/Backbone.CrossDomain",
 		"nicescroll": "../vendor/jquery.nicescroll/jquery.nicescroll.min"
 	},
 

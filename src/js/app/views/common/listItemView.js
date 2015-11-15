@@ -36,11 +36,17 @@ define([
 
 		removeFromFavourites: function(e) {
 			var self = this;
+			var b = document.body.style;
 
-			this.$el.addClass("removed-item").one("webkitAnimationEnd oanimationend msAnimationEnd animationend", function(e) {
+			if(b.MozTransition=='' || b.WebkitTransition=='' || b.OTransition=='' || b.transition=='') {
+				this.$el.addClass("removed-item").one("webkitAnimationEnd oanimationend msAnimationEnd animationend", function(e) {
+					self.model.destroy();
+					self.trigger("removed");
+				});
+			} else {
 				self.model.destroy();
 				self.trigger("removed");
-			});
+			}
 		}
 	});
 

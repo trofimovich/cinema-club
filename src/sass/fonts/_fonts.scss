@@ -3,23 +3,27 @@
 @font-face {
 	font-family: "Open Sans";
 	src: url(../fonts/OpenSans-Regular.ttf);
+	src: url(../fonts/opensans-regular-webfont.woff);
 }
 
 @font-face {
 	font-family: "Open Sans";
 	src: url(../fonts/OpenSans-Italic.ttf);
+	src: url(../fonts/opensans-italic-webfont.woff);
 	font-style: italic;
 }
 
 @font-face {
 	font-family: "Open Sans";
 	src: url(../fonts/OpenSans-Bold.ttf);
+	src: url(../fonts/opensans-bold-webfont.woff);
 	font-weight: bold;
 }
 
 @font-face {
 	font-family: "Open Sans";
 	src: url(../fonts/OpenSans-BoldItalic.ttf);
+	src: url(../fonts/opensans-bolditalic-webfont.woff);
 	font-weight: bold;
 	font-style: italic;
 }
